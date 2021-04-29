@@ -1,5 +1,8 @@
 # Group10_FinalProject
-This code allows for estimating PTPM and WBAM for Amputees.
+
+The SummaryJL_DummyFile.txt and SummaryAM_DummyFile.txt are the two fake datasets that we created for this project. This data will be fed into the machine learning algorithms.
+
+The Final_Code.py file allows for estimating PTPM and WBAM for Amputees. This code is explained in detail below:
 
 main() is the main function that allows us to predict PTPM and WBAM for amputees.
 
