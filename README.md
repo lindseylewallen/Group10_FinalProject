@@ -14,7 +14,7 @@ PlotData() plots inputs versus outputs. This requires a cleaned dataset (from im
 
 createlagorithm() takes in cleaned angular momentum and joint loading datasets and outputs 8 machine learning algorithms. It gives 4 linear models and 4 linear mixed effects models, one for each output. It has an optional argument "print summary" that allows you to look at the summary for each machine learning algorithm. This function should never be commented out.
 
-CVError() takes in all outputs from the importandclean() function and prints and returns 10-fold cross validation error for each of the 8 models. This can be commented out if you do not want to look at the error. The output for this function is saved in our files as: 'CVError.png'.
+CVError() takes in all outputs from the importandclean() function and prints and returns 10-fold cross validation error for each of the 8 models. This can be commented out if you do not want to look at the error. The output for this function is saved in our files as: 'CVError.png'. These errors might be slightly different every time the code is run.
 
 predictedvsactual() takes all 8 linear models and 2 cleaned datasets to create predicted versus actual plots. All datapoints should fall close to the 45 degree lines. This can be commented out if you do not want to look at these plots. The output graphs for this function are saved in our files as: 'lm_angmomcor_predvsobs.png', 'lm_transmomcor_predvsobs.png', 'lm_intptpm_predvsobs.png', 'lm_extptpm_predvsobs.png', 'lme_angmomcor_predvsobs.png', 'lme_transmomcor_predvsobs.png', 'lme_intptpm_predvsobs.png', and 'lme_extptpm_predvsobs.png'.
 
@@ -26,4 +26,4 @@ speed can be set to: 'ssw': self selected (default if input is something other t
 
 stiffness can be set to: 'a': low (default if input is something other than these three values or no stiffness is given), 'b': medium, or 'c': high.
   
-The output for this function is saved in our files as: 'prediction.png'.
+The output for this function is saved in our files as: 'prediction.png'. These values might be slightly different every time the code is run.
