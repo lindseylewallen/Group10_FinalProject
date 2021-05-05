@@ -49,10 +49,20 @@ def PlotData(dataset,x_names,y_names,x_label,y_label,figtitle,fignum=1):
 
 def histogram(dataset_AM,dataset_JL):
     #Use pandas to look at histogram of output data to check for normality
+    #Import necessary packages
+    import matplotlib.pyplot as plt
+    plt.figure(10)
     dataset_AM.hist('AngMomCor')
+    plt.savefig('histogramAngMomCor.png')
+    plt.figure(11)
     dataset_AM.hist('AngMomTrans')
+    plt.savefig('histogramAngMomTrans.png')
+    plt.figure(12)
     dataset_JL.hist('intptpm')
+    plt.savefig('histogramintptpm.png')
+    plt.figure(13)
     dataset_JL.hist('extptpm')
+    plt.savefig('histogramextptpm.png')
     return
 
 def importandclean(fileAM = 'SummaryAM.txt',fileJM='SummaryJL.txt'):
@@ -359,10 +369,44 @@ def predictedvsactual(dataset_AM,dataset_JL,lm1,lm2,lm3,lm4,mdf5,mdf6,mdf7,mdf8)
     plt.savefig('lme_extptpm_predvsobs.png')
     return
 
-def prediction(lm1,lm2,lm3,lm4,mass,height,out,st,slw,ssw,b,c):
+def prediction(lm1,lm2,lm3,lm4,mass,height,activity='st',speed='ssw',stiffness='a'):
     #Cleans and organizes data
     import pandas
-    data = {'mass':[mass],'height':[height],'OUT':[out],'ST':[st],'SLW':[slw],'SSW':[ssw],'B':[1],'C':[0]}
+    #Define categorical variables for activity- default is st
+    #If user defines wrong input, it will default to st
+    if activity == 'in':
+        st = 0
+        out = 0
+    elif activity == 'out':
+        st = 0
+        out  = 1
+    else:
+        st = 1
+        out = 0
+    #Define categorical variables for speed- default is ssw
+    #If user defines wrong input, it will default to ssw
+    if speed == 'fsw':
+        slw = 0
+        ssw = 0
+    elif speed == 'slw':
+        slw = 1
+        ssw = 0
+    else:
+        slw = 0
+        ssw = 1
+    #Define categorical variables for stiffness- default is a
+    #If user defines wrong input, it will default to a
+    if stiffness == 'b':
+        b = 1
+        c = 0
+    elif stiffness == 'c':
+        b = 0
+        c = 1
+    else:
+        b = 0
+        c = 0
+    
+    data = {'mass':[mass],'height':[height],'OUT':[out],'ST':[st],'SLW':[slw],'SSW':[ssw],'B':[b],'C':[c]}
     X = pandas.DataFrame(data,columns = ['mass','height','OUT','ST','SLW','SSW','B','C'])
     ypred1 = lm1.predict(X)
     ypred2 = lm2.predict(X)
@@ -383,7 +427,9 @@ def main():
     dataset_AM, dataset_JL, groups_AM, groups_JL = importandclean(fileAM = 'SummaryAM_DummyFile.txt',fileJM='SummaryJL_DummyFile.txt')
     
     #Plot inputs versus outputs
+    #This is for angular momentum data
     PlotData(groups_AM,['speed','stiffness','activity','mass','height'],['AngMomCor','AngMomTrans'],['Speed','Stiffness','Activity','Mass','Height'],['Coronal WBAM','Transverse WBAM'],'AngMomvsInputs',1)
+    #This is for joint loading data
     PlotData(groups_JL,['speed','stiffness','activity','mass','height'],['intptpm','extptpm'],['Speed','Stiffness','Activity','Mass','Height'],['Internal PTPM','External PTPM'],'PTPMvsInputs',2)
     
     #Create histogram of outputs
@@ -395,13 +441,25 @@ def main():
     #Calcualte error
     CVError(dataset_AM, dataset_JL, groups_AM, groups_JL)
     
-    #plot predicted versus actual
+    # #plot predicted versus actual
     predictedvsactual(dataset_AM,dataset_JL,lm1,lm2,lm3,lm4,mdf5,mdf6,mdf7,mdf8)
     
     #use simple model to predict on new person
+    #activity can be: 
+        #'st': straight (default)
+        #'out':prosthesis on outside of turn
+        #'in':prosthesis on inside of turn
+    #speed can be: 
+        #'ssw': self selected (default) 
+        #'fsw': slow
+        #'slw': fast
+    #stiffness can be: 
+        #'ssw': 'a': low (default) 
+        #'fsw': 'b': medium
+        #'slw': 'c': high
     #mass is 80 kg and height is 1.7 m
-    #They are walking straight at a self selected pace with stiffness B
-    prediction(lm1,lm2,lm3,lm4,mass=80,height=1.7,out=0,st=1,slw=0,ssw=1,b=1,c=0)
+    #For this subject, they are walking straight at a self selected pace with stiffness B
+    prediction(lm1,lm2,lm3,lm4,mass=80,height=1.7,activity='st',speed='ssw',stiffness='b')
 
 if __name__ == '__main__':
     main()
