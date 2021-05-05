@@ -20,19 +20,10 @@ predictedvsactual() takes all 8 linear models and 2 cleaned datasets to create p
 
 prediction() takes 4 linear models, one for each output, and inputs to the machine learning algorithms (mass, height, activity, speed, and stiffness) and returns a prediction for a new subject. This is the main function that you will want to modify for our code. You can change the machine learning algorithm that you wish to use or modify each input. The inputs can be specified as follows:
 
-activity can be set to: 
-  'st': straight (default if input is something other than these three values or no activity is given)
-  'out': prosthesis on outside of turn
-  'in': prosthesis on inside of turn
+activity can be set to: 'st': straight (default if input is something other than these three values or no activity is given), 'out': prosthesis on outside of turn, or 'in': prosthesis on inside of turn.
   
-speed can be set to: 
-  'ssw': self selected (default if input is something other than these three values or no speed is given)
-  'fsw': slow
-  'slw': fast
+speed can be set to: 'ssw': self selected (default if input is something other than these three values or no speed is given), 'fsw': slow, or 'slw': fast.
 
-stiffness can be set to: 
-  'ssw': 'a': low (default if input is something other than these three values or no stiffness is given)
-  'fsw': 'b': medium
-  'slw': 'c': high
+stiffness can be set to: 'a': low (default if input is something other than these three values or no stiffness is given), 'b': medium, or 'c': high.
   
 The output for this function is saved in our files as: 'prediction.png'.
