@@ -1,6 +1,10 @@
 # Group10_FinalProject
 
-The SummaryJL_DummyFile.txt and SummaryAM_DummyFile.txt are the two fake datasets that we created for this project. This data will be fed into the machine learning algorithms. Pictures of all outputs that come from this code are saved in the outputs.zip file. They come from using this code with these two fake datasets.
+The SummaryJL_DummyFile.txt and SummaryAM_DummyFile.txt are the two fake datasets that we created for this project. This data will be fed into the machine learning algorithms. 
+
+The Outputs.zip file contains pictures of all outputs from this code. The outputs come from using this code in conjunction with these two fake datasets.
+
+The FinalReport.pdf file gives a final summary of our work.
 
 The Final_Code.py file allows for estimating PTPM and WBAM for Amputees. The functions in this code are explained in detail below:
 
